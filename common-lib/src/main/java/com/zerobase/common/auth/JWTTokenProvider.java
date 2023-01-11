@@ -1,17 +1,19 @@
-package com.zerobase.auth;
+package com.zerobase.common.auth;
 
 import java.util.Date;
 
+import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
-import com.zerobase.util.AES256Encoder;
-import com.zerobase.type.MemberRole;
+import com.zerobase.common.type.MemberRole;
+import com.zerobase.common.util.AES256Encoder;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 
+@Component
 public class JWTTokenProvider {
 
     // todo 환경설정에서 읽어오기
@@ -31,7 +33,7 @@ public class JWTTokenProvider {
         claim.put(KEY_EMAIL, encrytedemail);
 
         claim.put(KEY_USERID, userId.toString());
-        claim.put(KEY_ROLE, memberRole);
+        claim.put(KEY_ROLE, memberRole.toString());
 
         Date now = new Date();
         Date expireDate = new Date(now.getTime() + expireTime);
@@ -64,11 +66,11 @@ public class JWTTokenProvider {
     }
 
     public Long getUserId(String token) {
-        return Long.parseLong((String) this.parseClaims(token).get(KEY_USERID));
+        return Long.parseLong((String)this.parseClaims(token).get(KEY_USERID));
     }
 
     public MemberRole getRole(String token) {
-        return (MemberRole) this.parseClaims(token).get(KEY_ROLE);
+        return MemberRole.valueOf((String)this.parseClaims(token).get(KEY_ROLE));
     }
 
     private Claims parseClaims(String token) {

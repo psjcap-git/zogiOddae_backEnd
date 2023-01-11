@@ -30,6 +30,7 @@ public enum ErrorCode {
     // Token
     EXPIRED_TOKEN("기간이 만료된 토큰입니다."),
     INVALID_TOKEN("토큰 정보가 올바르지 않습니다."),
+    NOT_AUTHROIZED("인증 되지 않은 유저입니다."),
     
     ;
     private final String description;

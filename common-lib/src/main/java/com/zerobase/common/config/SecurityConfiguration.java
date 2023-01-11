@@ -1,4 +1,4 @@
-package com.zerobase.user.config;
+package com.zerobase.common.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -11,7 +11,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-import com.zerobase.user.jwt.JwtAuthenticationFilter;
+import com.zerobase.common.auth.JwtAuthenticationFilter;
 
 import lombok.RequiredArgsConstructor;
 
@@ -39,12 +39,12 @@ public class SecurityConfiguration {
         // 로그인 필요없는 항목 설정.
         //http.authorizeRequests().antMatchers("/auth/ping").permitAll();
         //http.authorizeRequests().antMatchers("/auth/pong").permitAll();
-        http.authorizeRequests().antMatchers("/api/auth/sign-up/**").permitAll();
-        http.authorizeRequests().antMatchers("/api/auth/sign-up-verify").permitAll();
-        http.authorizeRequests().antMatchers("/api/auth/login").permitAll();
+        //http.authorizeRequests().antMatchers("/api/auth/sign-up/**").permitAll();
+        //http.authorizeRequests().antMatchers("/api/auth/sign-up-verify").permitAll();
+        //http.authorizeRequests().antMatchers("/api/auth/login").permitAll();
 
         // 로그인을 하지 않으면 "403 fobiden" 에러
-        http.authorizeRequests().anyRequest().authenticated();        
+        //http.authorizeRequests().anyRequest().authenticated();        
         
         http.addFilterBefore(authendicationFilter, UsernamePasswordAuthenticationFilter.class);
         return http.build();

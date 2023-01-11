@@ -8,9 +8,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-import com.zerobase.type.MemberPlatform;
-import com.zerobase.type.MemberRole;
-import com.zerobase.type.MemberStatus;
+import com.zerobase.common.type.MemberPlatform;
+import com.zerobase.common.type.MemberRole;
+import com.zerobase.common.type.MemberStatus;
 import com.zerobase.user.base.entity.BaseEntity;
 
 import lombok.AccessLevel;

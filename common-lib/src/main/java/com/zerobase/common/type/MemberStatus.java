@@ -1,4 +1,4 @@
-package com.zerobase.type;
+package com.zerobase.common.type;
 
 public enum MemberStatus {
 

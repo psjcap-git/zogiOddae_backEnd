@@ -3,16 +3,14 @@ package com.zerobase.user.member.service;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
-import javax.validation.Valid;
-
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.mysql.cj.util.StringUtils;
-import com.zerobase.auth.JWTTokenProvider;
-import com.zerobase.type.MemberPlatform;
-import com.zerobase.type.MemberRole;
-import com.zerobase.type.MemberStatus;
+import com.zerobase.common.auth.JWTTokenProvider;
+import com.zerobase.common.type.MemberPlatform;
+import com.zerobase.common.type.MemberRole;
+import com.zerobase.common.type.MemberStatus;
 import com.zerobase.user.exception.CustomException;
 import com.zerobase.user.exception.ErrorCode;
 import com.zerobase.user.member.dto.LoginRequestDto;
@@ -58,8 +56,8 @@ public class AuthService {
     public void signUp(SignUpRequestDto request, MemberPlatform platform, MemberRole role) {
         String emailKey = this.getMemberVerifyEmailKey(request.getEmail());
         if (redisService.hasKey(emailKey)) {
-            //redisService.delRedis(emailKey);
-            throw new CustomException(ErrorCode.SIGNUP_REQUEST_ALREADY_EXIST);
+            redisService.delRedis(emailKey);
+            //throw new CustomException(ErrorCode.SIGNUP_REQUEST_ALREADY_EXIST);
         }
 
         String uuid = "";
